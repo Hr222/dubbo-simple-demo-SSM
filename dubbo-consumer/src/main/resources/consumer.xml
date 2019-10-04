@@ -23,4 +23,8 @@
 
     <!-- 5.若是需要监控中心可以选择使用连接监控中心 -->
     <dubbo:monitor address="127.0.0.1:8080 "></dubbo:monitor>
+
+    <!-- 6.若是需要跳过检查可以配置以下配置(跳过检查,不跳过检查若是发现dubbo接口连接不上项目会直接报错) -->
+    <dubbo:consumer check="false"></dubbo:consumer>
+
 </beans>
