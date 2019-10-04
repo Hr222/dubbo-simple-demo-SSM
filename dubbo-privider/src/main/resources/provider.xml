@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd
+		http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 1、指定当前服务/应用的名字（同样的服务名字相同，不要和别的服务同名,防止冲突） -->
+    <dubbo:application name="boot-gmail-service-provider" ></dubbo:application>
+
+    <!-- 2、指定注册中心的位置 -->
+    <!-- 3.protocol协议我们这里直接写zookeeper,可以不用在address中写zookeeper:xxx.xxx.xxx.xxx:port -->
+    <dubbo:registry protocol="zookeeper" address="127.0.0.1:2181"></dubbo:registry>
+
+    <!-- 4、指定通信规则（通信协议？通信端口） -->
+    <dubbo:protocol name="dubbo" port="20882"></dubbo:protocol>
+
+    <!-- dubbo用到的服务 -->
+    <dubbo:service interface="com.api.GmailService" ref="gmailServiceImpl"></dubbo:service>
+
+    <!-- 服务的实现 -->
+    <bean id="gmailServiceImpl" class="com.test.impl.GmailServiceImpl"></bean>
+
+    <!-- 5.若是需要监控中心可以选择使用连接监控中心 -->
+    <dubbo:monitor address="127.0.0.1:8080 "></dubbo:monitor>
+</beans>
